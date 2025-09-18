@@ -5,7 +5,7 @@ thanks @p4ul17 for reference implemntation [https://github.com/p4ul17/voe-dl](ht
 ## Installation
 
 ```bash
-python3 -m pip install -U https://github.com/pelim/yt-dlp-legal-gray/archive/refs/heads/master.zip
+python3 -m pip install -U https://github.com/pelim/yt-dlp-plugin-voe/archive/refs/heads/master.zip
 ```
 
 ## Usage
