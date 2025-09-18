@@ -218,31 +218,6 @@ class VoeIE(InfoExtractor):
         video_id = self._match_id(url)
         self.to_screen(f'Starting extraction for video ID: {video_id}')
         
-        # Create debug directory if it doesn't exist
-        debug_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'debug')
-        os.makedirs(debug_dir, exist_ok=True)
-        
-        def save_debug_file(prefix, content):
-            """Helper to save debug files with timestamp and random suffix"""
-            if not content:
-                return
-                
-            timestamp = int(time.time())
-            rand_suffix = ''.join(random.choices('abcdef0123456789', k=6))
-            filename = f'{prefix}_{video_id}_{timestamp}_{rand_suffix}.html'
-            filepath = os.path.join(debug_dir, filename)
-            
-            try:
-                if isinstance(content, (dict, list)):
-                    content = json.dumps(content, indent=2, ensure_ascii=False)
-                with open(filepath, 'w', encoding='utf-8') as f:
-                    f.write(str(content))
-                self.to_screen(f'Saved debug file: {filepath}')
-                return filepath
-            except Exception as e:
-                self.report_warning(f'Error saving debug file {filename}: {str(e)}')
-                return None
-        
         # Try to bypass any potential bot detection
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -275,8 +250,6 @@ class VoeIE(InfoExtractor):
                 headers=headers,
                 expected_status=None)
             
-            # Save the initial page for debugging
-            save_debug_file('initial', webpage)
             
             # Check for JavaScript redirect
             max_redirects = 3
@@ -302,8 +275,6 @@ class VoeIE(InfoExtractor):
                         headers=headers,
                         expected_status=None)
                     
-                    # Save the redirected page for debugging
-                    save_debug_file(f'redirect_{i+1}', webpage)
                     
                     if not webpage or len(webpage) < 100:
                         self.report_warning(f'Empty or too short response from redirect {i+1}')
@@ -323,9 +294,6 @@ class VoeIE(InfoExtractor):
         if not title or len(title) < 3:  # Very short title might be invalid
             title = f'Video {video_id}'
             self.report_warning('Could not extract title, using fallback')
-
-        # Save the final webpage for debugging
-        save_debug_file('final', webpage)
         
         # Try to find video URL using different methods
         video_urls = []
