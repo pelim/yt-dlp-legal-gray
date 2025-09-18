@@ -1,20 +1,17 @@
-This repository contains a sample plugin package for [yt-dlp](https://github.com/yt-dlp/yt-dlp#readme). 
+yt-dlp plugin for voe.sx
 
-See [yt-dlp plugins](https://github.com/yt-dlp/yt-dlp#plugins) for more details.
-
+thanks @p4ul17 for reference implemntation [https://github.com/p4ul17/voe-dl](https://github.com/p4ul17/voe-dl)
 
 ## Installation
 
-Requires yt-dlp `2023.01.02` or above.
-
-You can install this package with pip:
-```
-python3 -m pip install -U https://github.com/yt-dlp/yt-dlp-sample-plugins/archive/master.zip
+```bash
+python3 -m pip install -U https://github.com/pelim/yt-dlp-legal-gray/archive/refs/heads/master.zip
 ```
 
-See [installing yt-dlp plugins](https://github.com/yt-dlp/yt-dlp#installing-plugins) for the other methods this plugin package can be installed.
+## Usage
+
+```bash
+yt-dlp  https://voe.sx/e/ng7ja5n5n2y8
+```
 
 
-## Development
-
-See the [Plugin Development](https://github.com/yt-dlp/yt-dlp/wiki/Plugin-Development) section of the yt-dlp wiki.
